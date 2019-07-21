@@ -1,5 +1,6 @@
 package cn.redis.practice;
 
+import cn.redis.util.RedisPoolUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +29,13 @@ public class RedisDemo {
      */
     @Test
     public void jedisSting(){
-        //jedis.set("key","value");
-        System.out.println(jedis.get("key"));
+
+        if(jedis.exists("key")){
+            System.out.println("Redis中的值："+ jedis.get("key"));
+        }else{
+            jedis.set("key","value");
+            System.out.println("MySQL中的值："+ jedis.get("key"));
+        }
     }
 
 
